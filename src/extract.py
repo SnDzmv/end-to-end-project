@@ -32,7 +32,7 @@ def extract_data(url, params):
 
 
 def save_raw(data):
-    raw_dir = BASE_DIR / "data" / "raw"
+    raw_dir = BASE_DIR / "data" / "raw" / "variant_13"
     raw_dir.mkdir(parents=True, exist_ok=True)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -47,10 +47,15 @@ def save_raw(data):
 
 def main():
     config = load_config()
+
     url, params = build_url(config)
+
     print("Sending request to:", url)
+
     data = extract_data(url, params)
+
     print("Saving raw data")
+
     save_raw(data)
 
 
