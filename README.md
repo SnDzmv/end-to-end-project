@@ -121,3 +121,34 @@ python src/mart.py
 normalized → mart
 
 Витрина содержит очищенные, обогащённые и агрегированные данные с рассчитанными метриками для анализа безработицы.
+
+# Неделя 5 — Интеграция SQL и Postgres
+
+На этой неделе мы сделали первый шаг по переходу от файлов к базе данных. Основные цели:
+
+- Загрузка mart-файла `mart_yearly.csv` в Postgres  
+- Создание таблицы `mart_yearly` с правильной схемой  
+- Идемпотентная загрузка (повторный запуск не создает дублей)  
+- Проведение базовых SQL-проверок для качества данных
+
+## Файлы
+
+- `src/load.py` — скрипт загрузки mart в Postgres  
+- `src/sql_checks.py` — скрипт для выполнения 5 SQL-проверок  
+- `docs/sql_checks.md` — описание проведенных проверок
+
+
+## Использование
+
+1. Поднять Postgres через Docker:
+```bash
+docker run -d --name postgres_db -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=mydb -p 5432:5432 postgres
+```
+Загрузить mart:
+```bash
+python src/load.py
+```
+Выполнить проверки:
+```bash
+python src/sql_checks.py
+```
