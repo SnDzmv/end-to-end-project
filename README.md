@@ -188,9 +188,13 @@ PostgreSQL (mart_yearly)
 pip install -r requirements.txt
 ```
 Full pipeline (полная пересборка)
+```bash
 python src/pipeline.py --mode full
+```
 Incremental pipeline (инкрементальная загрузка)
+```bash
 python src/pipeline.py --mode incremental
+```
 
 Файл состояния:
 
