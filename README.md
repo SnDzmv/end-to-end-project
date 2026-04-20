@@ -207,6 +207,7 @@ data/state.json
   "last_run": "2026-04-20T20:08:53",
   "mode": "incremental"
 }
+
 Watermark
 
 Используется поле:
