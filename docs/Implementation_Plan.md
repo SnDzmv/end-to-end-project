@@ -132,3 +132,45 @@
 4. Написание `sql_checks.py` для выполнения 5 основных проверок
 5. Проверка результатов в базе через Python
 6. Документирование выполненных проверок в `sql_checks.md`
+
+# Неделя 6
+
+Объединить ETL-этапы в единый pipeline с поддержкой:
+- full и incremental режимов
+- state management
+- watermark логики
+- идемпотентности
+
+---
+
+## Архитектура ETL
+
+### 1. Extract
+- загрузка данных из World Bank API
+- сохранение raw JSON
+
+---
+
+### 2. Normalization
+- преобразование JSON → табличный формат
+- очистка данных
+- сохранение CSV
+
+---
+
+### 3. Mart
+- объединение с reference-данными
+- расчёт метрик:
+  - value_diff
+  - growth_rate
+  - rolling_avg_3
+  - trend
+
+---
+
+### 4. Load
+- загрузка mart в PostgreSQL
+- создание таблицы (IF NOT EXISTS)
+- TRUNCATE перед full загрузкой
+
+---
