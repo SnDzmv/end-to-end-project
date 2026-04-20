@@ -152,3 +152,78 @@ python src/load.py
 ```bash
 python src/sql_checks.py
 ```
+
+# Неделя 6 — ETL Pipeline
+
+Проект реализует полный ETL-пайплайн обработки данных об уровне безработицы в Южной Африке на основе API World Bank.
+
+Система поддерживает:
+- Full загрузку (полная пересборка данных)
+- Incremental загрузку (обработка только новых данных)
+- State management (хранение watermark и состояния)
+- Разделение слоёв данных (raw / normalized / mart)
+- Загрузку в PostgreSQL
+
+---
+
+Extract (API World Bank)
+↓
+Raw JSON
+↓
+Normalization (Jupyter Notebook)
+↓
+Normalized CSV
+↓
+Mart (feature engineering)
+↓
+PostgreSQL (mart_yearly)
+
+
+---
+
+## Запуск проекта
+
+### Установка зависимостей
+```bash
+pip install -r requirements.txt
+```
+Full pipeline (полная пересборка)
+python src/pipeline.py --mode full
+Incremental pipeline (инкрементальная загрузка)
+python src/pipeline.py --mode incremental
+
+Файл состояния:
+
+data/state.json
+
+Пример:
+
+{
+  "last_year": 2025,
+  "last_run": "2026-04-20T20:08:53",
+  "mode": "incremental"
+}
+Watermark
+
+Используется поле:
+
+year
+
+Назначение:
+
+определяет, какие данные уже обработаны
+используется в incremental режиме
+ Business Key
+
+Уникальность записей:
+
+country_name + year
+Режимы работы
+Full mode
+пересоздаёт весь mart
+игнорирует watermark
+используется TRUNCATE в БД
+Incremental mode
+использует state.json
+фильтрует данные по last_year
+обрабатывает только новые записи
