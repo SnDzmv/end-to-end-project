@@ -1,0 +1,32 @@
+[
+    {
+        "check": "non_empty",
+        "status": "PASS",
+        "details": 35
+    },
+    {
+        "check": "not_null_year",
+        "status": "PASS",
+        "details": 0
+    },
+    {
+        "check": "not_null_value",
+        "status": "PASS",
+        "details": 0
+    },
+    {
+        "check": "unique_country_year",
+        "status": "PASS",
+        "details": 0
+    },
+    {
+        "check": "year_range",
+        "status": "PASS",
+        "details": 0
+    },
+    {
+        "check": "growth_rate_range",
+        "status": "PASS",
+        "details": 0
+    }
+]
