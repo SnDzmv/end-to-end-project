@@ -1,3 +1,49 @@
+Contract version: 0.1
+
+## General Info
+Project: South Africa Unemployment Analytics  
+Source: World Bank API  
+Indicator: SL.UEM.TOTL.ZS  
+Granularity: 1 row = 1 country per year  
+Timezone: UTC (year-level data, timezone not critical)
+
+---
+
+## mart.unemployment_sa
+
+| column_name       | dtype   | nullable | unit        | description |
+|------------------|--------|----------|-------------|-------------|
+| country_name     | string | no       | -           | краткое название страны |
+| country_name_full| string | no       | -           | полное название страны |
+| region           | string | no       | -           | регион (Africa) |
+| income_level     | string | no       | -           | уровень дохода страны |
+| year             | int    | no       | year        | год наблюдения |
+| value            | float  | no       | %           | уровень безработицы |
+| value_prev       | float  | yes      | %           | значение за предыдущий год |
+| value_diff       | float  | yes      | p.p.        | разница с прошлым годом |
+| growth_rate      | float  | yes      | %           | темп роста относительно прошлого года |
+| trend            | string | yes      | -           | направление изменения (growth/decline/no_change) |
+| rolling_avg_3    | float  | yes      | %           | скользящее среднее за 3 года |
+
+---
+
+## Naming & Units Rules
+
+- snake_case для всех колонок
+- year — целое число
+- все проценты хранятся в диапазоне 0–100 (НЕ 0–1)
+- value_diff измеряется в процентных пунктах (p.p.)
+- timestamp не используется, так как данные годовые
+- запрещены абстрактные имена (value допустимо, т.к. это стандарт индикатора World Bank)
+
+---
+
+## Changelog
+
+0.1 (2026-05-04):
+- initial version of mart schema
+
+
 # Data Contract — Неделя 2
 
 ## Источник
