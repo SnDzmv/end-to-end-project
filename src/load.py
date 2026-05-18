@@ -3,11 +3,12 @@ from sqlalchemy import create_engine, text
 import os
 
 
-POSTGRES_USER = "user"
-POSTGRES_PASSWORD = "pass"
-POSTGRES_DB = "mydb"
-POSTGRES_HOST = "localhost"
-POSTGRES_PORT = "5433"
+
+POSTGRES_HOST = "postgres"
+POSTGRES_PORT = "5432"
+POSTGRES_DB = "airflow"
+POSTGRES_USER = "airflow"
+POSTGRES_PASSWORD = "airflow"
 
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
