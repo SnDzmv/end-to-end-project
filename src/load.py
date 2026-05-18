@@ -7,7 +7,7 @@ POSTGRES_USER = "user"
 POSTGRES_PASSWORD = "pass"
 POSTGRES_DB = "mydb"
 POSTGRES_HOST = "localhost"
-POSTGRES_PORT = "5432"
+POSTGRES_PORT = "5433"
 
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
