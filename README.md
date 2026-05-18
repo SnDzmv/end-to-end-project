@@ -384,3 +384,71 @@ pytest
 -- некорректные значения
 - после чего проверки возвращали FAIL / WARNING
 
+
+# Неделя 10 — Docker + PostgreSQL + Metabase
+
+## Описание проекта
+
+Проект представляет собой локальную аналитическую среду на базе:
+
+- PostgreSQL
+- Metabase
+- Docker Compose
+
+Данные mart загружаются в PostgreSQL и используются для построения BI-дашборда в Metabase.
+
+---
+
+## Используемые технологии
+- Docker
+- Docker Compose
+- PostgreSQL 16
+- Metabase
+- Python
+- pandas
+- SQLAlchemy
+
+## Запуск проекта
+### 1. Запуск контейнеров
+```docker compose up -d```
+### 2. Проверка контейнеров
+```docker compose ps```
+### 3. Загрузка данных в PostgreSQL
+```python load.py```
+### 4. Открытие Metabase
+
+В браузере:
+
+```http://localhost:3000```
+## Параметры PostgreSQL
+```
+Database: mydb
+User: user
+Password: pass
+```
+## Docker Volumes
+
+Используются volumes:
+
+- pgdata
+- metabase_data
+
+Volumes позволяют сохранять данные между пересозданиями контейнеров.
+
+## BI Dashboard
+
+Dashboard построен на таблице:
+
+```mart_yearly```
+
+Созданы визуализации:
+
+- line chart
+- bar chart
+- summary visualization
+---
+## Скриншоты
+
+Скриншоты dashboard и графиков находятся в:
+
+```docs/bi/```
