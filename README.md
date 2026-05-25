@@ -518,3 +518,82 @@ docker compose up -d
 ## Результат
 
 Пайплайн успешно выполняется в Airflow и формирует витрину данных в PostgreSQL.
+
+
+
+# Неделя 12 Airflow ETL pipeline 2
+
+
+## Структура пайплайна
+
+```text
+extract → transform → dq → load
+```
+
+## Запуск Airflow
+
+```bash
+docker compose up -d
+```
+
+Airflow UI:
+
+```text
+http://localhost:8080
+```
+
+Логин:
+
+```text
+airflow
+```
+
+Пароль:
+
+```text
+airflow
+```
+
+## DAG
+
+Основной DAG:
+
+```text
+airflow/dags/etl_variant_13.py
+```
+
+Расписание:
+
+```python
+schedule="*/5 * * * *"
+```
+
+## Инкрементальность
+
+Каждый DAG Run обрабатывает свой период через:
+
+```python
+{{ ds }}
+```
+
+Файлы сохраняются как:
+
+```text
+data/mart/variant_13/mart_YYYY-MM-DD.csv
+```
+
+## Идемпотентность
+
+Load реализован через:
+
+```sql
+DELETE period + INSERT
+```
+
+Повторный retry не создает дубликаты.
+
+## DQ Gate
+
+DQ выполняется перед load.
+
+При FAIL DAG останавливается.
