@@ -1,11 +1,26 @@
+import argparse
 import pandas as pd
 from pathlib import Path
+
+
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--date", required=True)
+args = parser.parse_args()
+
+run_date = args.date
+
+print("RUN DATE:", run_date)
+
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 normalized_path = BASE_DIR / "data" / "normalized" / "variant_13" / "2026-03-23_12-00-00.csv"
 reference_path = BASE_DIR / "reference" / "countries.csv"
-output_path = BASE_DIR / "data" / "mart" / "variant_13" / "mart_yearly.csv"
+output_path = BASE_DIR / "data" / "mart" / "variant_13" / f"mart_{run_date}.csv"
 
 output_path.parent.mkdir(parents=True, exist_ok=True)
 
