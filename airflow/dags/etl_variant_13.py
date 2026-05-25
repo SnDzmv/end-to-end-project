@@ -19,16 +19,16 @@ with DAG(
         task_id="extract",
         bash_command="""
         echo 'START EXTRACT' &&
-        python /opt/airflow/project/src/extract.py &&
+        python /opt/airflow/project/src/extract.py --date {{ ds }} &&
         echo 'END EXTRACT'
         """
     )
 
     transform = BashOperator(
         task_id="transform",
-        bash_command="""
+        bash_command=""" 
         echo 'START TRANSFORM' &&
-        python /opt/airflow/project/src/mart.py &&
+        python /opt/airflow/project/src/mart.py --date {{ ds }} &&
         echo 'END TRANSFORM'
         """
     )
@@ -37,7 +37,7 @@ with DAG(
         task_id="load",
         bash_command="""
         echo 'START LOAD' &&
-        python /opt/airflow/project/src/load.py &&
+        python /opt/airflow/project/src/load.py --date {{ ds }} &&
         echo 'END LOAD'
         """
     )
@@ -46,9 +46,9 @@ with DAG(
         task_id="dq",
         bash_command="""
         echo 'START DQ' &&
-        python /opt/airflow/project/src/dq.py &&
+        python /opt/airflow/project/src/dq.py --date {{ ds }} &&
         echo 'END DQ'
         """
     )
 
-    extract >> transform >> load >> dq
+    extract >> transform >> dq >> load
