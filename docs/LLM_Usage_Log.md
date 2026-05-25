@@ -305,3 +305,36 @@ LLM использовался как ассистент для:
 - обучения Docker + Airflow
 - исправления ошибок конфигурации
 - построения ETL pipeline
+
+# Неделя 12
+
+
+Использование LLM:
+
+- настройка incremental DAG
+- реализация idempotent load
+- настройка retry-safe pipeline
+- реализация DQ gate
+- помощь с PostgreSQL и Docker
+- исправление ошибок Airflow
+
+## Использованные файлы
+
+- airflow/dags/etl_variant_13.py
+- src/load.py
+- src/dq.py
+- src/mart.py
+- README.md
+- docs/Implementation_Plan.md
+
+## Проверка результата
+
+Проверено:
+
+- успешное выполнение DAG
+- отсутствие дублей при retry
+- корректная работа DQ gate
+- успешная загрузка данных в PostgreSQL
+
+
+
