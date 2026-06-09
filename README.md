@@ -120,7 +120,7 @@ docs/llm/summary.md
 docs/LLM_Usage_Log.md
 ```
 
-
+## Неделя 1
 
 ## Установка (Windows)
 
