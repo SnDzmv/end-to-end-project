@@ -1,5 +1,127 @@
 # Сквозной проект
 
+Учебный end-to-end проект по анализу данных Всемирного банка: получение данных через World Bank API, нормализация, построение mart-витрины, проверки качества данных, загрузка в PostgreSQL, визуализация, ML-анализ, Airflow-оркестрация и формирование проверяемой LLM-сводки.
+
+# Что делает проект
+
+Проект работает с данными Всемирного банка по показателю безработицы в Южно-Африканской Республике (South Africa).
+
+Основная цепочка:
+
+```text
+Extract -> Transform -> Mart -> DQ -> Load -> LLM Summary
+```
+
+Слои данных:
+
+```text
+data/raw/variant_13/           raw JSON из World Bank API
+data/normalized/variant_13/    очищенные CSV
+data/mart/variant_13/          аналитическая витрина
+docs/dq_report.json            отчет качества данных
+docs/ml/                       артефакты ML-анализа
+docs/llm/summary.md            итоговая LLM-сводка
+```
+
+# Быстрый запуск проекта
+
+## Запуск инфраструктуры
+
+```bash
+docker compose up -d
+```
+## Воспроизводимый запуск из корня проекта:
+```
+python -m src.pipeline.pipeline --mode full
+```
+Инкрементальный режим:
+```
+python -m src.pipeline.pipeline --mode incremental
+```
+Последовательное выполнение extract, transform, mart, load, dq.
+
+
+## Airflow
+
+Открыть:
+
+```text
+http://localhost:8080
+```
+
+DAG:
+
+```text
+etl_variant_13
+```
+
+Цепочка задач:
+
+```text
+extract -> transform -> mart -> load -> dq
+```
+
+## Построение LLM Summary
+
+```bash
+python src/llm_summary.py
+```
+
+Будут созданы:
+
+```text
+docs/llm/context.md
+docs/llm/prompt.md
+docs/llm/summary.md
+docs/LLM_Usage_Log.md
+```
+
+# Источник данных
+
+Источник:
+
+```text
+World Bank API
+```
+
+Показатель:
+
+```text
+Unemployment, total (% of total labor force)
+```
+
+Страна:
+
+```text
+South Africa (ZAF)
+```
+
+# Реализованные компоненты
+
+- Extract (получение данных из World Bank API)
+- Transform (очистка и нормализация)
+- Mart (аналитическая витрина)
+- DQ (проверки качества данных)
+- PostgreSQL Load
+- Airflow orchestration
+- BI-визуализация
+- ML-анализ (Week 13)
+- LLM Summary с anti-hallucination подходом (Week 14)
+
+# Основные артефакты
+
+```text
+docs/dq_report.json
+docs/ml/week13_summary.md
+docs/ml/metrics.png
+docs/llm/context.md
+docs/llm/prompt.md
+docs/llm/summary.md
+docs/LLM_Usage_Log.md
+```
+
+
+
 ## Установка (Windows)
 
 1. Установить Miniconda.  
